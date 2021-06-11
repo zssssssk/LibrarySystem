@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<!--解决idea thymeleaf 表达式模板报红波浪线-->
+<!--suppress ALL -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="#" type="image/png">
+
+
+
+    <!--dynamic table-->
+    <link href="js/advanced-datatable/css/demo_page.css" rel="stylesheet"/>
+    <link href="js/advanced-datatable/css/demo_table.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css"/>
+
+
+    <div th:replace="common :: commomheader">
+
+    </div>
+</head>
+
+<body class="sticky-header">
+
+<section>
+
+
+
+    <div th:replace="common :: headermenu"></div>
+    
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        <div class="header-section">
+
+        <!--toggle button start-->
+        <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+        <!--toggle button end-->
+
+        <!--search start-->
+        <form class="searchform" action="http://view.jqueryfuns.com/2014/4/10/7_df25ceea231ba5f44f0fc060c943cdae/index.html" method="post">
+            <input type="text" class="form-control" name="keyword" placeholder="Search here..." />
+        </form>
+        <!--search end-->
+
+        <!--notification menu start -->
+        <div class="menu-right">
+            <ul class="notification-menu">
+                <li>
+                    <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
+                        <i class="fa fa-tasks"></i>
+                        <span class="badge">8</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-head pull-right">
+                        <h5 class="title">You have 8 pending task</h5>
+                        <ul class="dropdown-list user-list">
+                            <li class="new">
+                                <a href="#">
+                                    <div class="task-info">
+                                        <div>Database update</div>
+                                    </div>
+                                    <div class="progress progress-striped">
+                                        <div style="width: 40%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-warning">
+                                            <span class="">40%</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="new">
+                                <a href="#">
+                                    <div class="task-info">
+                                        <div>Dashboard done</div>
+                                    </div>
+                                    <div class="progress progress-striped">
+                                        <div style="width: 90%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="90" role="progressbar" class="progress-bar progress-bar-success">
+                                            <span class="">90%</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="task-info">
+                                        <div>Web Development</div>
+                                    </div>
+                                    <div class="progress progress-striped">
+                                        <div style="width: 66%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="66" role="progressbar" class="progress-bar progress-bar-info">
+                                            <span class="">66% </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="task-info">
+                                        <div>Mobile App</div>
+                                    </div>
+                                    <div class="progress progress-striped">
+                                        <div style="width: 33%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="33" role="progressbar" class="progress-bar progress-bar-danger">
+                                            <span class="">33% </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="task-info">
+                                        <div>Issues fixed</div>
+                                    </div>
+                                    <div class="progress progress-striped">
+                                        <div style="width: 80%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="80" role="progressbar" class="progress-bar">
+                                            <span class="">80% </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="new"><a href="">See All Pending Task</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
+                        <i class="fa fa-envelope-o"></i>
+                        <span class="badge">5</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-head pull-right">
+                        <h5 class="title">You have 5 Mails </h5>
+                        <ul class="dropdown-list normal-list">
+                            <li class="new">
+                                <a href="">
+                                    <span class="thumb"><img src="images/photos/user1.png" alt="" /></span>
+                                        <span class="desc">
+                                          <span class="name">John Doe <span class="badge badge-success">new</span></span>
+                                          <span class="msg">Lorem ipsum dolor sit amet...</span>
+                                        </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <span class="thumb"><img src="images/photos/user2.png" alt="" /></span>
+                                        <span class="desc">
+                                          <span class="name">Jonathan Smith</span>
+                                          <span class="msg">Lorem ipsum dolor sit amet...</span>
+                                        </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <span class="thumb"><img src="images/photos/user3.png" alt="" /></span>
+                                        <span class="desc">
+                                          <span class="name">Jane Doe</span>
+                                          <span class="msg">Lorem ipsum dolor sit amet...</span>
+                                        </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <span class="thumb"><img src="images/photos/user4.png" alt="" /></span>
+                                        <span class="desc">
+                                          <span class="name">Mark Henry</span>
+                                          <span class="msg">Lorem ipsum dolor sit amet...</span>
+                                        </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <span class="thumb"><img src="images/photos/user5.png" alt="" /></span>
+                                        <span class="desc">
+                                          <span class="name">Jim Doe</span>
+                                          <span class="msg">Lorem ipsum dolor sit amet...</span>
+                                        </span>
+                                </a>
+                            </li>
+                            <li class="new"><a href="">Read All Mails</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
+                        <i class="fa fa-bell-o"></i>
+                        <span class="badge">4</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-head pull-right">
+                        <h5 class="title">Notifications</h5>
+                        <ul class="dropdown-list normal-list">
+                            <li class="new">
+                                <a href="">
+                                    <span class="label label-danger"><i class="fa fa-bolt"></i></span>
+                                    <span class="name">Server #1 overloaded.  </span>
+                                    <em class="small">34 mins</em>
+                                </a>
+                            </li>
+                            <li class="new">
+                                <a href="">
+                                    <span class="label label-danger"><i class="fa fa-bolt"></i></span>
+                                    <span class="name">Server #3 overloaded.  </span>
+                                    <em class="small">1 hrs</em>
+                                </a>
+                            </li>
+                            <li class="new">
+                                <a href="">
+                                    <span class="label label-danger"><i class="fa fa-bolt"></i></span>
+                                    <span class="name">Server #5 overloaded.  </span>
+                                    <em class="small">4 hrs</em>
+                                </a>
+                            </li>
+                            <li class="new">
+                                <a href="">
+                                    <span class="label label-danger"><i class="fa fa-bolt"></i></span>
+                                    <span class="name">Server #31 overloaded.  </span>
+                                    <em class="small">4 hrs</em>
+                                </a>
+                            </li>
+                            <li class="new"><a href="">See All Notifications</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <img src="images/photos/user-avatar.png" alt="" />
+                        John Doe
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                        <li><a href="#"><i class="fa fa-user"></i>  Profile</a></li>
+                        <li><a href="#"><i class="fa fa-cog"></i>  Settings</a></li>
+                        <li><a href="#"><i class="fa fa-sign-out"></i> Log Out</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+        <!--notification menu end -->
+
+        </div>
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>
+                Form Validation
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">Form</a>
+                </li>
+                <li class="active"> Form Validation </li>
+            </ul>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            请输入最新值
+                        </header>
+                        <div class="panel-body">
+                            <div class=" form">
+                                <form class="cmxform form-horizontal adminex-form" id="commentForm" method="post" th:action="@{/Book}">
+                                    <div class="form-group ">
+                                        <label for="cname" class="control-label col-lg-2">id (required)</label>
+                                        <div class="col-lg-10">
+                                            <input class=" form-control" id="cname" name="id"  type="text" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="cemail" class="control-label col-lg-2">name (required)</label>
+                                        <div class="col-lg-10">
+                                            <input class="form-control " id="cemail"  name="name" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="curl" class="control-label col-lg-2">author (optional)</label>
+                                        <div class="col-lg-10">
+                                            <input class="form-control " id="curl"  name="author" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="ccomment" class="control-label col-lg-2">publish (required)</label>
+                                        <div class="col-lg-10">
+                                            <textarea class="form-control " id="ccomment" name="publish" required></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <label for="ccomment" class="control-label col-lg-2">ISBN (required)</label>
+                                        <div class="col-lg-10">
+                                            <textarea class="form-control "  name="ISBN" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="ccomment" class="control-label col-lg-2">time (required)</label>
+                                        <div class="col-lg-10">
+                                            <textarea class="form-control "  name="time" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                <label for="ccomment" class="control-label col-lg-2">state (required)</label>
+                                <div class="col-lg-10">
+                                    <textarea class="form-control "  name="state" required></textarea>
+                                </div>
+                            </div>
+                                    <div class="form-group ">
+                            <label for="ccomment" class="control-label col-lg-2">pages (required)</label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control "  name="pages" required></textarea>
+                            </div>
+                        </div>
+
+
+                                    <div class="form-group">
+                                        <div class="col-lg-offset-2 col-lg-10">
+                                            <button class="btn btn-primary" type="submit">确定</button>
+                                            <button class="btn btn-default" type="button">取消</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        <footer>
+            2021 &copy; AdminEx by 仙王
+        </footer>
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<div th:replace="common :: commonscript"></div>
+
+<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+<script src="js/validation-init.js"></script>
+
+<!--common scripts for all pages-->
+<script src="js/scripts.js"></script>
+
+</body>
+</html>

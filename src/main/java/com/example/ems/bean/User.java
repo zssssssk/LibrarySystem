@@ -12,10 +12,10 @@ public class User {
     private String username;
     private String password;
 
-    //以下为多的数据库字段
+
 
     private long id;
-    private String quantity;
+    private long quantity;
     private String email;
     private String address;
 

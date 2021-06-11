@@ -42,68 +42,67 @@ public class tableController {
     @Autowired
     BorrowedBookService borrowedBookService;
 
-
+//------------------Administrator--------------------------------
     @GetMapping("/Administrator")
-    public String basic_table(Model model){
+    public String basic_table(Model model) {
 
         List<Administrator> list = administratorService.list();
-        model.addAttribute("Administrators",list);
+        model.addAttribute("Administrators", list);
 
         return "table/Administrator";
     }
 
 
-
+    //-----------------------------Users-----------------------------
     @GetMapping("/Users")
-    public String dynamic_table(Model model){
+    public String dynamic_table(Model model,HttpSession session) {
 
         //从数据表中查出UserTable的数据进行展示
         List<User> list = userService.list();
 
-        model.addAttribute("users",list);
+        model.addAttribute("users", list);
 
+        //id为0才是真正的系统管理员
+        User loginUser = (User) session.getAttribute("loginUser");
+
+        model.addAttribute("p", loginUser.getId());
 
 
         return "table/Users";
     }
-    @GetMapping("/BorrowedBook")
-    public String editable_table(Model model,HttpSession session){
 
-        User loginUser = (User) session.getAttribute("loginUser");
+    @GetMapping("/user/delete/{id}")
+    public String deleteUser(@PathVariable("id") Long id){
 
-
-        model.addAttribute("permission",loginUser.getId());
-
-        List<BorrowedBook> list = borrowedBookService.list();
-        model.addAttribute("borrowedBooks",list);
-
-        return "table/BorrowedBook";
+        userService.removeById(id);
+        return "redirect:/Users";
     }
 
 
+
+//--------------------------Book--------------------------
     @GetMapping("/Book")
-    public String responsive_table(Model model,HttpSession session){
+    public String responsive_table(Model model, HttpSession session) {
 
 
         User loginUser = (User) session.getAttribute("loginUser");
         boolean booleannn = false;
-        if (loginUser.getId()==0){
+        if (loginUser.getId() == 0) {
             booleannn = true;
         }
-        model.addAttribute("permission",booleannn);
+        model.addAttribute("permission", booleannn);
 
-        model.addAttribute("returnState","0");
+        model.addAttribute("returnState", "0");
 
         List<Book> list = bookService.list();
-        model.addAttribute("books",list);
-
+        model.addAttribute("books", list);
 
 
         return "table/Book";
     }
 
     @GetMapping("/book/delete/{id}")
-    public String deleteBook(@PathVariable("id") Long id){
+    public String deleteBook(@PathVariable("id") Long id) {
 
         bookService.removeById(id);
 
@@ -112,14 +111,14 @@ public class tableController {
 
     @GetMapping("/book/borrow/{id}")
     public String borrowBook(@PathVariable("id") Long id,
-                             @RequestParam("ISBN")String ISBN,
-                             @RequestParam("name")String name,
-                             HttpSession session){
+                             @RequestParam("ISBN") String ISBN,
+                             @RequestParam("name") String name,
+                             HttpSession session) {
 
 
         //更新Book
         UpdateWrapper<Book> bookUpdateWrapper = new UpdateWrapper<>();
-        bookUpdateWrapper.eq("id",id).set("state",1);
+        bookUpdateWrapper.eq("id", id).set("state", 1);
         bookService.update(bookUpdateWrapper);
 
         //更新BorrowedBook
@@ -134,38 +133,67 @@ public class tableController {
 
         borrowedBookService.save(borrowedBook);
 
+        //更新Users
+        Long borrowedQ = loginUser.getQuantity();
+        borrowedQ+=1;
+        UpdateWrapper<User> userUpdateWrapper = new UpdateWrapper<>();
+        userUpdateWrapper.eq("id",loginUser.getId()).set("quantity",borrowedQ);
+        userService.update(userUpdateWrapper);
+
 
         return "redirect:/Book";
     }
 
     @GetMapping("/book/update")
-    public String updateBook(){
+    public String updateBook() {
 
         return "table/formUpdate";
     }
 
     @PostMapping("/Book")
-    public  String Book(Book book){
+    public String Book(Book book) {
         bookService.saveOrUpdate(book);
 
         return "table/Book";
     }
 
+    //----------------------------BorrowedBook-----------------------------
     @GetMapping("/book/return/{id}")
-    public String BookReturn(@PathVariable("id")Long id){
+    public String BookReturn(@PathVariable("id") Long id,HttpSession session) {
 
         QueryWrapper<BorrowedBook> borrowedBookQueryWrapper = new QueryWrapper<>();
-        borrowedBookQueryWrapper.eq("bookid",id);
+        borrowedBookQueryWrapper.eq("bookid", id);
 
         borrowedBookService.remove(borrowedBookQueryWrapper);
 
 
-
         UpdateWrapper<Book> bookUpdateWrapper = new UpdateWrapper<>();
-        bookUpdateWrapper.eq("id",id).set("state",0);
+        bookUpdateWrapper.eq("id", id).set("state", 0);
         bookService.update(bookUpdateWrapper);
 
+        //更新Users
+        User loginUser = (User) session.getAttribute("loginUser");
+        Long borrowedQ = loginUser.getQuantity();
+        borrowedQ--;
+        UpdateWrapper<User> userUpdateWrapper = new UpdateWrapper<>();
+        userUpdateWrapper.eq("id",loginUser.getId()).set("quantity",borrowedQ);
+        userService.update(userUpdateWrapper);
+
         return "redirect:/BorrowedBook";
+    }
+
+    @GetMapping("/BorrowedBook")
+    public String editable_table(Model model, HttpSession session) {
+
+        User loginUser = (User) session.getAttribute("loginUser");
+
+
+        model.addAttribute("permission", loginUser.getId());
+
+        List<BorrowedBook> list = borrowedBookService.list();
+        model.addAttribute("borrowedBooks", list);
+
+        return "table/BorrowedBook";
     }
 
 }

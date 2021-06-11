@@ -70,7 +70,7 @@
                                     <tr>
                                         <th>id</th>
                                         <th>username</th>
-                                        <th>quantity</th>
+                                        <th>borrowed quantity</th>
                                         <th class="hidden-phone">email</th>
                                         <th class="hidden-phone">address</th>
                                         <th  >操作</th>
@@ -85,7 +85,9 @@
                                         <td th:text="${user.quantity}">Win 95+</td>
                                         <td class="center hidden-phone" th:text="${user.email}">4</td>
                                         <td class="center hidden-phone" th:text="${user.address}">X</td>
-                                        <th><button  type="button">删除</button></th>
+                                        <td th:if="${p} != 0"><a   type="button" title="请先充值会员">删除</a></td>
+                                        <td th:if="${p} == 0"><a  th:href="@{/user/delete/{id}(id=${user.id})}" class="btn btn-danger btn-sm" type="button">删除</a></td>
+
                                     </tr>
 
                                     </tbody>
@@ -93,7 +95,7 @@
                                     <tr>
                                         <th>id</th>
                                         <th>username</th>
-                                        <th>quantity</th>
+                                        <th>borrowed quantity</th>
                                         <th class="hidden-phone">email</th>
                                         <th class="hidden-phone">address</th>
                                         <th  >操作</th>
