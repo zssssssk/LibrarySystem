@@ -20,7 +20,7 @@ public class loginController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/login")
+    @GetMapping(value = {"/login","/"})
     public String login(){
         return "login";
     }
@@ -61,16 +61,8 @@ public class loginController {
     @GetMapping("/main.html")
     public String mainPage(HttpSession session,Model model){
 
-        //是否登录  拦截器，过滤器
-        Object loginUser = session.getAttribute("loginUser");
-        if (loginUser != null){
-            return "main";
-        }else{
-            //回到登录页面
-            model.addAttribute("msg","请重新登录");
-            return "login";
-        }
 
+            return "main";
 
     }
 

@@ -14,7 +14,7 @@ public class User {
 
     //以下为多的数据库字段
 
-    private int id;
+    private long id;
     private String quantity;
     private String email;
     private String address;

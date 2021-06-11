@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!--解决idea thymeleaf 表达式模板报红波浪线-->
+<!--suppress ALL -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="#" type="image/png">
+
+    <title>Book Table</title>
+
+    <!--Userstable-->
+    <link href="js/advanced-datatable/css/demo_page.css" rel="stylesheet"/>
+    <link href="js/advanced-datatable/css/demo_table.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css"/>
+
+
+    <div th:replace="common::commomheader">
+
+    </div>
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <div th:replace="common :: leftmenu"></div>
+
+    <div th:replace="common :: headermenu"></div>
+
+    <!-- main content start-->
+    <div class="main-content">
+
+
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>
+                UsersTable
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Data Tables</a>
+                </li>
+                <li class="active"> UsersTable</li>
+            </ul>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            UsersTable
+                            <span class="tools pull-right">
+                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                <a href="javascript:;" class="fa fa-times"></a>
+             </span>
+                        </header>
+                        <div class="panel-body">
+                            <div class="adv-table">
+                                <table class="display table table-bordered table-striped" id="dynamic-table">
+                                    <thead>
+                                    <tr>
+                                        <th >id</th>
+                                        <th>name</th>
+                                        <th  class="numeric">author</th>
+                                        <th  class="numeric">publish</th>
+                                        <th  class="numeric">ISBN </th>
+                                        <th  class="numeric">time</th>
+                                        <th  class="numeric">price($)</th>
+                                        <th  class="numeric">state</th>
+                                        <th  >pages</th>
+                                        <th  >操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="book:${books}">
+                                        <th th:text="${book.id}">id</th>
+                                        <th th:text="${book.name}">name</th>
+                                        <th th:text="${book.author}" class="numeric">author</th>
+                                        <th th:text="${book.publish}" class="numeric">publish</th>
+                                        <th th:text="${book.ISBN}" class="numeric">ISBN </th>
+                                        <th th:text="${book.time}" class="numeric">time</th>
+                                        <th th:text="${book.price}" class="numeric">price</th>
+                                        <th th:text="${book.state}" class="numeric">state</th>
+                                        <th th:text="${book.pages}" >pages</th>
+                                        <th><a th:if="${permission}" th:href="@{/book/delete/{id}(id=${book.id})}" class="btn btn-danger btn-sm" type="button">删除</a>
+                                            <a th:if="${book.state eq returnState}" th:href="@{/book/borrow/{id}(id=${book.id},ISBN=${book.ISBN},name=${book.name},state=${book.state})}"  class="btn btn-warning" type="button">借阅</a>
+                                        </th>
+
+
+                                    </tr>
+
+                                    </tbody>
+                                    <tfoot>
+                                    <th >id</th>
+                                    <th>name</th>
+                                    <th  class="numeric">author</th>
+                                    <th  class="numeric">publish</th>
+                                    <th  class="numeric">ISBN </th>
+                                    <th  class="numeric">time</th>
+                                    <th  class="numeric">price($)</th>
+                                    <th  class="numeric">state</th>
+                                    <th  >pages</th>
+                                    <th  >操作</th>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+
+                </div>
+            </div>
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        <footer>
+            2021 &copy; AdminEx by 仙王
+        </footer>
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<div th:replace="common :: commonscript"></div>
+
+<!--Userstable-->
+<script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
+<!--Userstable initialization -->
+<script src="js/dynamic_table_init.js"></script>
+
+<!--common scripts for all pages-->
+<script src="js/scripts.js"></script>
+
+</body>
+</html>

@@ -8,12 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Book {
-    public int id;
+
+    public long id;
     public String name;
     public String author;
     public String publish;
-    public String ISBN;
     public String time;
+    public String ISBN;
     public String price;
     public String state;
     public String keywords;

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class Administrator {
 
-    private int id;
+    private long id;
     private String username;
     private String password;
 
