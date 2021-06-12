@@ -32,4 +32,4 @@ Mysql+SpringBoot+Mybaties plus+Thymeleaf
 
 [3] *SpringBoot官方文档*
 
-[4] *bilibili视频*——借鉴了好多个，最多的是雷神springbboot
+[4] *bilibili视频*——借鉴了好多个，最多的是雷神springboot
