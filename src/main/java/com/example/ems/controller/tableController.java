@@ -44,10 +44,13 @@ public class tableController {
 
 //------------------Administrator--------------------------------
     @GetMapping("/Administrator")
-    public String basic_table(Model model) {
+    public String basic_table(Model model,HttpSession session) {
 
         List<Administrator> list = administratorService.list();
         model.addAttribute("Administrators", list);
+
+        User loginUser = (User) session.getAttribute("loginUser");
+        model.addAttribute("privilege",loginUser.getId());
 
         return "table/Administrator";
     }
@@ -154,7 +157,7 @@ public class tableController {
     public String Book(Book book) {
         bookService.saveOrUpdate(book);
 
-        return "table/Book";
+        return "redirect:/Book";
     }
 
     //----------------------------BorrowedBook-----------------------------

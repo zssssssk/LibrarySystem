@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+  <style th:fragment="noteStyle">
+    /* *{
+        margin: 0;
+        padding: 0;
+    } */
+    #note{
+      position: relative;
+      left: 0px;
+      top: 3em;
+    }
+    .i{
+      opacity: 0.7;
+      box-shadow: 10px 10px 5px #888888;
+    }
+    .block0{
+
+      width: 500px;
+      height: 3em;
+      position: absolute;
+      top: 286px;
+      display: block;
+    }
+    .t,.p1{
+      height: 3em;
+      position: absolute;
+      right: 0;
+    }
+    .p1{
+      top: 25px;
+
+    }
+    .p2{
+      position: absolute;
+      height: 4em;
+      right: 13px;
+      top: 10px;
+    }
+    .n0{
+      font-size: 2em;
+      position: absolute;
+      left: 94px;
+      color: rgb(102, 233, 250);
+
+    }
+    .onCreatedBlock{
+      border: 2px solid rgb(146, 139, 139);
+      width: 500px;
+      height: 6em;
+      position: absolute;
+      top: 21em;
+      display: none;
+
+    }
+    .hadCreatedBlock{
+      border: 2px solid rgb(146, 139, 139);
+      width: 500px;
+      height: 6em;
+      position: absolute;
+      top: 21em;
+      overflow: auto;
+      background-color: blanchedalmond;
+    }
+    .CreatedBlock{
+      border: 2px solid rgb(146, 139, 139);
+      width: 500px;
+      height: 6em;
+      top: 21em;
+      position: absolute;
+      display:none;
+    }
+    .text0{
+      position: absolute;
+      top: 14px;
+      left: 38px;
+      font-size: 20px;
+      box-shadow: 5px 5px 5px #888888;
+      width: 335px;
+      height: 55px;
+    }
+    .wenzi{
+      white-space:normal;
+      word-break:break-all;
+      word-wrap:break-word;
+      font-size: 20px;
+    }
+
+  </style>
+</head>
+<!--
+    笔记思路:输入块在DOM树生成时完成，位置固定，设置为DISPALY:NONE
+            点击添加：已生成块向下移->输入块DISPLAY:BLOCK
+            点击确定：输入块DISPLAY:NONE;创建一个新的块加入到已生成块中
+            点击删除：下面的所有已生成块向上移，删除当前块
+
+ -->
+<body>
+<div th:fragment="noteBody" id="note">
+  <img src="image/5/2.jpg" alt="i" class="i" height="737px" width="500">
+  <div class="block0">
+    <span class="n0">你已探索到世界尽头</span>
+    <img src="image/5/添加.png" class="t">
+  </div>
+
+  <div class="onCreatedBlock">
+    <input type='text' class='text0'>
+    <img src='image/5/通过.png' class='p1'>
+  </div>
+
+  <div class='CreatedBlock'>
+    <img src='image/5/删除.png' class='p2'>
+  </div>
+
+</div>
+
+<script th:fragment="noteScript">
+  var NumBlock = 0;//用于删除
+  var Ichilds = document.getElementsByClassName('p2');
+  var Bchilds = document.getElementsByClassName('hadCreatedBlock');
+
+
+  $('.t').click(function(){   //添加
+    $(Bchilds).css(
+            "top",function(index,value){return parseFloat(value)+98;}
+    )
+    $('.onCreatedBlock').css('display','block');
+    $('.text0').val('');
+  })
+
+
+  $(document).on('click','.p1',function () {//确定添加
+    NumBlock++;
+    alert('添加成功');
+    $('.onCreatedBlock').css('display','none');
+    var htmm = "";
+    htmm += "<div class='hadCreatedBlock'>";
+    htmm += "<img src='image/5/删除.png' class='p2' onclick='capture(this)' >";
+    htmm += "</div>";
+    $('#note').append(htmm);
+    var v = $('.text0').val();
+    var htm = "";
+    var d = new Date();
+    htm += "<span  class='wenzi' style='color: cornflowerblue'>";
+    htm += `${v}`;
+    htm += "<br><br>"
+    htm +=d.toLocaleString();
+    htm += " </span>";
+    $('.hadCreatedBlock:last').append(htm);
+  })
+
+  //因为删除图片类名全一样，故只能在创建的时候加上onclick，params为传入的this指针（习惯说法）
+  function capture(params) {
+    for(var i=1;i<=NumBlock;i++){
+      if(params==Ichilds[i]){
+        var parent = Ichilds[i].parentNode;
+        parent.remove(Ichilds[i]);
+        break;
+      }
+      else{
+        $(Bchilds[i-1]).css(
+                "top",function(index,value){return parseFloat(value)-98}
+        )
+      }
+    }
+
+  }
+
+</script>
+
+</body>
+</html>

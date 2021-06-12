@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="ThemeBucket">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <div th:replace="note :: noteStyle"></div>
     <link rel="shortcut icon" href="#" type="image/png">
 
     <title>Administrator Table</title>
@@ -105,7 +107,7 @@
         </div>
         <!--body wrapper end-->
 
-        <div class="col-md-12">
+        <div  class="col-md-12">
             <section class="panel">
                 <header class="panel-heading">
                     Buttons With Icon
@@ -159,13 +161,15 @@
                     <div class="">
                         <button class="btn btn-block btn-primary" type="button"> <span class="pull-left"><i class="fa fa-facebook"></i></span> <span class="bold">Facebook</span></button>
                         <button class="btn btn-block btn-info" type="button"> <span class="pull-left"><i class="fa fa-twitter"></i></span> <span class="bold">Twitter</span></button>
-                        <button class="btn btn-block btn-danger" type="button"> <span class="pull-left"><i class="fa fa-google-plus"></i></span> <span class="bold">Google</span></button>
-                        <a th:href="@{/registration}" class="btn btn-block btn-default" type="button"> <span class="pull-left"><i class="fa fa-flickr"></i></span> <span class="bold">Add New User</span></a>
+                        <button class="btn btn-block btn-danger" type="button"> <span class="pull-left"><i class="fa fa-google-plus"></i></span> <span class="bold">Google +</span></button>
+                        <a  th:href="@{/registration}" class="btn btn-block btn-default" type="button"> <span class="pull-left"><i class="fa fa-flickr"></i></span> <span class="bold">Add New User</span></a>
                     </div>
                 </div>
             </section>
 
         </div>
+        <div th:replace="note :: noteBody"></div>
+
 
 
 
@@ -190,6 +194,9 @@
 
 <!--common scripts for all pages-->
 <script src="js/scripts.js"></script>
+<div th:replace="note :: noteScript"></div>
 
 </body>
+
+
 </html>
